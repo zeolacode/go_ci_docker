@@ -9,7 +9,7 @@ on:
 jobs:
 
   test:
-    runs-on: ${{matrix.os}}
+    runs-on: ${{ matrix.os }}
     env:
       HOST: localhost
       PORT: 5432
@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         go_version: ['1.18', '1.17', '>=1.18']
-        os: ['ubuntu-latest']
+        os: ['ubuntu-latest', 'ubuntu-18.04']
     steps:
     - uses: actions/checkout@v3
 
@@ -43,12 +43,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ['ubuntu-latest']
+        os: ['ubuntu-latest', 'ubuntu-18.04']
     steps:
     - uses: actions/checkout@v3
     - name: Build
       run: go build -v main.go
-
 
   docker:
     needs: build
